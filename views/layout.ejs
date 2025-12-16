@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MCP Tool Tracker</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="/">Home</a>
+
+      <% if (session.userId) { %>
+        <a href="/tools">My Tools</a>
+        <a href="/diagnostics">Diagnostics</a>
+        <a href="/logout">Logout</a>
+      <% } else { %>
+        <a href="/login">Login</a>
+        <a href="/signup">Sign Up</a>
+      <% } %>
+    </nav>
+  </header>
+
+  <main>
+    <%- body %>
+  </main>
+
+</body>
+</html>

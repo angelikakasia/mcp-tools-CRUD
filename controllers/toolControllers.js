@@ -1,53 +1,68 @@
-const Tool = require('../models/tool');
+const User = require('../models/user');
 
-module.exports = {
-  index,
-  renderNew,
-  create,
-  show,
-  renderEdit,
-  update,
-  delete: deleteTool
+// Show ALL tools for logged-in user
+exports.index = async (req, res) => {
+  const user = await User.findById(req.session.userId);
+  res.render('tools/index', { tools: user.tools });
 };
 
-// GET /tools
-async function index(req, res) {
-  const tools = await Tool.find({ createdBy: req.session.user._id });
-  res.render('tools/index', { tools });
-}
-
-// GET /tools/new
-function renderNew(req, res) {
+// Show form to create a new tool
+exports.new = (req, res) => {
   res.render('tools/new');
-}
+};
 
-// POST /tools
-async function create(req, res) {
-  req.body.createdBy = req.session.user._id;
-  await Tool.create(req.body);
+// Create tool
+exports.create = async (req, res) => {
+  const user = await User.findById(req.session.userId);
+
+  user.tools.push({
+    name: req.body.name,
+    description: req.body.description,
+    platform: req.body.platform,
+    tags: req.body.tags.split(',').map(t => t.trim()),
+    riskLevel: req.body.riskLevel
+  });
+
+  await user.save();
   res.redirect('/tools');
-}
+};
 
-// GET /tools/:id
-async function show(req, res) {
-  const tool = await Tool.findById(req.params.id);
+// Show a single tool + its diagnostics
+exports.show = async (req, res) => {
+  const user = await User.findById(req.session.userId);
+  const tool = user.tools.id(req.params.id);
+
   res.render('tools/show', { tool });
-}
+};
 
-// GET /tools/:id/edit
-async function renderEdit(req, res) {
-  const tool = await Tool.findById(req.params.id);
+// Edit form
+exports.edit = async (req, res) => {
+  const user = await User.findById(req.session.userId);
+  const tool = user.tools.id(req.params.id);
+
   res.render('tools/edit', { tool });
-}
+};
 
-// PUT /tools/:id
-async function update(req, res) {
-  await Tool.findByIdAndUpdate(req.params.id, req.body);
-  res.redirect(`/tools/${req.params.id}`);
-}
+// Update tool
+exports.update = async (req, res) => {
+  const user = await User.findById(req.session.userId);
+  const tool = user.tools.id(req.params.id);
 
-// DELETE /tools/:id
-async function deleteTool(req, res) {
-  await Tool.findByIdAndDelete(req.params.id);
+  tool.name = req.body.name;
+  tool.description = req.body.description;
+  tool.platform = req.body.platform;
+  tool.tags = req.body.tags.split(',').map(t => t.trim());
+  tool.riskLevel = req.body.riskLevel;
+
+  await user.save();
+  res.redirect(`/tools/${tool._id}`);
+};
+
+// Delete tool
+exports.delete = async (req, res) => {
+  const user = await User.findById(req.session.userId);
+  user.tools.id(req.params.id).deleteOne();
+  await user.save();
+
   res.redirect('/tools');
-}
+};

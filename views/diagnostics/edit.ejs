@@ -1,0 +1,21 @@
+<%- include('../layout') %>
+
+<h1>Edit Diagnostic</h1>
+
+<form action="/diagnostics/<%= diagnostic._id %>?_method=PUT" method="POST">
+
+  <label>Severity</label>
+  <select name="severity">
+    <option value="Low" <%= diagnostic.severity === "Low" ? "selected" : "" %>>Low</option>
+    <option value="Medium" <%= diagnostic.severity === "Medium" ? "selected" : "" %>>Medium</option>
+    <option value="High" <%= diagnostic.severity === "High" ? "selected" : "" %>>High</option>
+  </select>
+
+  <label>Note</label>
+  <textarea name="note"><%= diagnostic.note %></textarea>
+
+  <button type="submit">Save Changes</button>
+
+</form>
+
+<a href="/tools/<%= diagnostic.toolId %>">Back to Tool</a>

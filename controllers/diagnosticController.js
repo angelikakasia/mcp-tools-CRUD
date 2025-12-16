@@ -1,49 +1,56 @@
-const Tool = require('../models/tool');
+const User = require('../models/user');
 
-module.exports = {
-  create,
-  renderEdit,
-  update,
-  delete: deleteDiagnostic
+// Show form to create a diagnostic for a tool
+exports.new = async (req, res) => {
+  const user = await User.findById(req.session.userId);
+  const tool = user.tools.id(req.params.toolId);
+
+  res.render('diagnostics/new', { tool });
 };
 
-// POST /diagnostics
-async function create(req, res) {
-  const tool = await Tool.findById(req.body.toolId);
+// Create diagnostic
+exports.create = async (req, res) => {
+  const user = await User.findById(req.session.userId);
+  const tool = user.tools.id(req.params.toolId);
+
   tool.diagnostics.push({
-    note: req.body.note,
-    severity: req.body.severity
+    severity: req.body.severity,
+    note: req.body.note
   });
-  await tool.save();
+
+  await user.save();
   res.redirect(`/tools/${tool._id}`);
-}
+};
 
-// GET /diagnostics/:id/edit
-async function renderEdit(req, res) {
-  const tool = await Tool.findOne({ "diagnostics._id": req.params.id });
-
-  const diagnostic = tool.diagnostics.id(req.params.id);
+// Edit form
+exports.edit = async (req, res) => {
+  const user = await User.findById(req.session.userId);
+  const tool = user.tools.id(req.params.toolId);
+  const diagnostic = tool.diagnostics.id(req.params.diagnosticId);
 
   res.render('diagnostics/edit', { tool, diagnostic });
-}
+};
 
-// PUT /diagnostics/:id
-async function update(req, res) {
-  const tool = await Tool.findOne({ "diagnostics._id": req.params.id });
+// Update diagnostic
+exports.update = async (req, res) => {
+  const user = await User.findById(req.session.userId);
+  const tool = user.tools.id(req.params.toolId);
+  const diagnostic = tool.diagnostics.id(req.params.diagnosticId);
 
-  const diagnostic = tool.diagnostics.id(req.params.id);
-
-  diagnostic.note = req.body.note;
   diagnostic.severity = req.body.severity;
+  diagnostic.note = req.body.note;
 
-  await tool.save();
+  await user.save();
   res.redirect(`/tools/${tool._id}`);
-}
+};
 
-// DELETE /diagnostics/:id
-async function deleteDiagnostic(req, res) {
-  const tool = await Tool.findOne({ "diagnostics._id": req.params.id });
-  tool.diagnostics.id(req.params.id).deleteOne();
-  await tool.save();
+// Delete diagnostic
+exports.delete = async (req, res) => {
+  const user = await User.findById(req.session.userId);
+  const tool = user.tools.id(req.params.toolId);
+
+  tool.diagnostics.id(req.params.diagnosticId).deleteOne();
+
+  await user.save();
   res.redirect(`/tools/${tool._id}`);
-}
+};
