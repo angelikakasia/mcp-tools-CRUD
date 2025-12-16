@@ -40,6 +40,7 @@ app.use('/tools', require('./routes/toolRoutes'));
 app.use('/diagnostics', require('./routes/diagnosticRoutes'));
 
 // Start server
-app.listen(3000, () => {
-  console.log('Server running at http://localhost:3000');
+app.listen(app.get('port'), () => {
+  console.log(`Server running at http://localhost:${app.get('port')}`);
 });
+
