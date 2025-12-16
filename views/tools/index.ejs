@@ -1,0 +1,18 @@
+<%- include('../layout') %>
+
+<h1>Your MCP Tools</h1>
+
+<a href="/tools/new">Add New Tool</a>
+
+<ul>
+  <% tools.forEach(tool => { %>
+    <li>
+      <strong><a href="/tools/<%= tool._id %>"><%= tool.name %></a></strong>
+      — <%= tool.riskLevel %>
+
+      <form action="/tools/<%= tool._id %>?_method=DELETE" method="POST" style="display:inline;">
+        <button>Delete</button>
+      </form>
+    </li>
+  <% }) %>
+</ul>

@@ -1,0 +1,47 @@
+<%- include('../layout') %>
+
+<h1><%= tool.name %></h1>
+
+<p><strong>Description:</strong> <%= tool.description %></p>
+<p><strong>Platform:</strong> <%= tool.platform %></p>
+<p><strong>Risk Level:</strong> <%= tool.riskLevel %></p>
+
+<a href="/tools/<%= tool._id %>/edit">Edit Tool</a>
+
+<hr>
+
+<h2>Diagnostics</h2>
+
+<ul>
+  <% tool.diagnostics.forEach(d => { %>
+    <li>
+      <strong><%= d.severity %></strong>: <%= d.note %>
+
+      <a href="/diagnostics/<%= d._id %>/edit">Edit</a>
+
+      <form method="POST" action="/diagnostics/<%= d._id %>?_method=DELETE" style="display:inline;">
+        <button>Delete</button>
+      </form>
+    </li>
+  <% }) %>
+</ul>
+
+<hr>
+
+<h3>Add Diagnostic</h3>
+
+<form action="/diagnostics" method="POST">
+  <input type="hidden" name="toolId" value="<%= tool._id %>">
+
+  <label>Severity</label>
+  <select name="severity">
+    <option value="Low">Low</option>
+    <option value="Medium">Medium</option>
+    <option value="High">High</option>
+  </select>
+
+  <label>Note</label>
+  <textarea name="note"></textarea>
+
+  <button type="submit">Add Diagnostic</button>
+</form>

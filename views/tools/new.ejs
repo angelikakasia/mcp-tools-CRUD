@@ -1,0 +1,26 @@
+<%- include('../layout') %>
+
+<h1>Add MCP Tool</h1>
+
+<form action="/tools" method="POST">
+  <label>Name</label>
+  <input type="text" name="name" required>
+
+  <label>Description</label>
+  <textarea name="description"></textarea>
+
+  <label>Platform</label>
+  <input type="text" name="platform">
+
+  <label>Tags (comma separated)</label>
+  <input type="text" name="tags">
+
+  <label>Risk Level</label>
+  <select name="riskLevel">
+    <option value="Low">Low</option>
+    <option value="Medium">Medium</option>
+    <option value="High">High</option>
+  </select>
+
+  <button type="submit">Create Tool</button>
+</form>
