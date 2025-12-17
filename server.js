@@ -1,14 +1,13 @@
-// server.js
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override'); // enables PUT/DELETE
 const session = require('express-session'); // keeps user logged in
-const MongoStore = require('connect-mongo'); // stores session in MongoDB
+const MongoStore = require('connect-mongo').default; // stores session in MongoDB
 
 const app = express(); // starts express app
 app.set('view engine', 'ejs'); // sets EJS as view engine
-app.set('port', process.env.PORT || 3000); // sets port from environment or default to 3000
+app.set('port', process.env.PORT || 3333); // sets port from environment or default to 3000
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI);
@@ -33,9 +32,18 @@ app.use(session({
     mongoUrl: process.env.MONGODB_URI
   })
 }));
+// Make user available in all EJS views
+app.use((req, res, next) => {
+  res.locals.user = req.session.user;
+  next();
+});
+// GET /
+app.get('/', (req, res) => {
+    res.render('index.ejs')
+})
 
 // Routes
-app.use('/', require('./routes/authRoutes'));
+app.use('/auth', require('./routes/authRoutes'));
 app.use('/tools', require('./routes/toolRoutes'));
 app.use('/diagnostics', require('./routes/diagnosticRoutes'));
 

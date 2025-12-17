@@ -1,21 +1,28 @@
 <%- include('../layout') %>
 
-<h1>Edit Diagnostic</h1>
+<h1>Edit Diagnostic for <%= tool.name %></h1>
 
-<form action="/diagnostics/<%= diagnostic._id %>?_method=PUT" method="POST">
+<form action="/diagnostics/<%= tool._id %>/<%= diagnostic._id %>?_method=PUT" method="POST">
+
+  <label>Attack Type</label>
+  <input type="text" name="attackType" value="<%= diagnostic.attackType %>" required>
 
   <label>Severity</label>
   <select name="severity">
     <option value="Low" <%= diagnostic.severity === "Low" ? "selected" : "" %>>Low</option>
     <option value="Medium" <%= diagnostic.severity === "Medium" ? "selected" : "" %>>Medium</option>
     <option value="High" <%= diagnostic.severity === "High" ? "selected" : "" %>>High</option>
+    <option value="Critical" <%= diagnostic.severity === "Critical" ? "selected" : "" %>>Critical</option>
   </select>
 
-  <label>Note</label>
+  <label>Notes</label>
   <textarea name="note"><%= diagnostic.note %></textarea>
 
-  <button type="submit">Save Changes</button>
+  <label>
+    <input type="checkbox" name="resolved" <%= diagnostic.resolved ? "checked" : "" %>> Resolved
+  </label>
 
+  <button type="submit">Update Diagnostic</button>
 </form>
 
-<a href="/tools/<%= diagnostic.toolId %>">Back to Tool</a>
+<a href="/tools/<%= tool._id %>">Back to Tool</a>

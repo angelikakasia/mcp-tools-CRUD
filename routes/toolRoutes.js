@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const toolController = require('../controllers/toolController');
+const toolController = require('../controllers/toolControllers');
 const isLoggedIn = require('../middleware/isLoggedIn');
 
 // All routes below require login

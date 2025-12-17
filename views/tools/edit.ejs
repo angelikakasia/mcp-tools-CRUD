@@ -1,27 +1,29 @@
 <%- include('../layout') %>
 
-<h1>Edit MCP Tool</h1>
+<h1>Edit Tool</h1>
 
 <form action="/tools/<%= tool._id %>?_method=PUT" method="POST">
 
   <label>Name</label>
   <input type="text" name="name" value="<%= tool.name %>" required>
 
-  <label>Description</label>
-  <textarea name="description"><%= tool.description %></textarea>
-
   <label>Platform</label>
-  <input type="text" name="platform" value="<%= tool.platform %>">
-
-  <label>Tags (comma separated)</label>
-  <input type="text" name="tags" value="<%= tool.tags.join(', ') %>">
+  <input type="text" name="platform" value="<%= tool.platform %>" required>
 
   <label>Risk Level</label>
   <select name="riskLevel">
-    <option <%= tool.riskLevel === 'Low' ? 'selected' : '' %> value="Low">Low</option>
-    <option <%= tool.riskLevel === 'Medium' ? 'selected' : '' %> value="Medium">Medium</option>
-    <option <%= tool.riskLevel === 'High' ? 'selected' : '' %> value="High">High</option>
+    <option <%= tool.riskLevel === "Low" ? "selected" : "" %>>Low</option>
+    <option <%= tool.riskLevel === "Medium" ? "selected" : "" %>>Medium</option>
+    <option <%= tool.riskLevel === "High" ? "selected" : "" %>>High</option>
   </select>
 
-  <button type="submit">Save Changes</button>
+  <label>Description</label>
+  <textarea name="description"><%= tool.description %></textarea>
+
+  <label>Tags</label>
+  <input type="text" name="tags" value="<%= tool.tags.join(', ') %>">
+
+  <button type="submit">Update Tool</button>
 </form>
+
+<a href="/tools/<%= tool._id %>">Cancel</a>

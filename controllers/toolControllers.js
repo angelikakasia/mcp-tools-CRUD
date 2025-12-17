@@ -1,68 +1,151 @@
-const User = require('../models/user');
+const Tool = require('../models/tool');
+const Diagnostic = require('../models/diagnostic'); // tools and diagnostics are related
 
-// Show ALL tools for logged-in user
+
+// INDEX – show all tools that belong to logged-in user
+
 exports.index = async (req, res) => {
-  const user = await User.findById(req.session.userId);
-  res.render('tools/index', { tools: user.tools });
+  try {
+    const tools = await Tool.find({ createdBy: req.session.user._id });
+
+    res.render('tools/index', { tools });
+
+  } catch (err) {
+    console.log('Error loading tools index:', err);
+    res.redirect('/');
+  }
 };
 
-// Show form to create a new tool
-exports.new = (req, res) => {
+
+// NEW – render form to create a new tool
+
+exports.renderNew = (req, res) => {
   res.render('tools/new');
 };
 
-// Create tool
+
+
+// CREATE – add new tool for logged-in user
+
 exports.create = async (req, res) => {
-  const user = await User.findById(req.session.userId);
+  try {
+    const tagsArray = req.body.tags
+      ? req.body.tags.split(',').map(tag => tag.trim())
+      : [];
 
-  user.tools.push({
-    name: req.body.name,
-    description: req.body.description,
-    platform: req.body.platform,
-    tags: req.body.tags.split(',').map(t => t.trim()),
-    riskLevel: req.body.riskLevel
-  });
+    await Tool.create({
+      name: req.body.name,
+      platform: req.body.platform,
+      riskLevel: req.body.riskLevel,
+      description: req.body.description,
+      tags: tagsArray,
+      createdBy: req.session.user._id   // referencing the user
+    });
 
-  await user.save();
-  res.redirect('/tools');
+    res.redirect('/tools');
+
+  } catch (err) {
+    console.log('Error creating tool:', err);
+    res.redirect('/tools');
+  }
 };
 
-// Show a single tool + its diagnostics
+
+// SHOW – display one tool + its diagnostics
+
 exports.show = async (req, res) => {
-  const user = await User.findById(req.session.userId);
-  const tool = user.tools.id(req.params.id);
+  try {
+    // Find tool only if it belongs to the logged-in user
+    const tool = await Tool.findOne({
+      _id: req.params.id,
+      createdBy: req.session.user._id
+    });
 
-  res.render('tools/show', { tool });
+    if (!tool) return res.redirect('/tools');
+
+    // Load diagnostics referencing this tool
+    const diagnostics = await Diagnostic.find({ tool: tool._id });
+
+    res.render('tools/show', { tool, diagnostics });
+
+  } catch (err) {
+    console.log('Error showing tool:', err);
+    res.redirect('/tools');
+  }
 };
 
-// Edit form
-exports.edit = async (req, res) => {
-  const user = await User.findById(req.session.userId);
-  const tool = user.tools.id(req.params.id);
 
-  res.render('tools/edit', { tool });
+
+// EDIT – show edit form for a tool
+
+exports.renderEdit = async (req, res) => {
+  try {
+    const tool = await Tool.findOne({
+      _id: req.params.id,
+      createdBy: req.session.user._id
+    });
+
+    if (!tool) return res.redirect('/tools');
+
+    res.render('tools/edit', { tool });
+
+  } catch (err) {
+    console.log('Error loading edit form:', err);
+    res.redirect('/tools');
+  }
 };
 
-// Update tool
+
+
+// UPDATE – update an existing tool
+
 exports.update = async (req, res) => {
-  const user = await User.findById(req.session.userId);
-  const tool = user.tools.id(req.params.id);
+  try {
+    const tool = await Tool.findOne({
+      _id: req.params.id,
+      createdBy: req.session.user._id
+    });
 
-  tool.name = req.body.name;
-  tool.description = req.body.description;
-  tool.platform = req.body.platform;
-  tool.tags = req.body.tags.split(',').map(t => t.trim());
-  tool.riskLevel = req.body.riskLevel;
+    if (!tool) return res.redirect('/tools');
 
-  await user.save();
-  res.redirect(`/tools/${tool._id}`);
+    tool.name = req.body.name;
+    tool.platform = req.body.platform;
+    tool.riskLevel = req.body.riskLevel;
+    tool.description = req.body.description;
+    tool.tags = req.body.tags
+      ? req.body.tags.split(',').map(tag => tag.trim())
+      : [];
+
+    await tool.save();
+
+    res.redirect(`/tools/${tool._id}`);
+
+  } catch (err) {
+    console.log('Error updating tool:', err);
+    res.redirect('/tools');
+  }
 };
 
-// Delete tool
-exports.delete = async (req, res) => {
-  const user = await User.findById(req.session.userId);
-  user.tools.id(req.params.id).deleteOne();
-  await user.save();
 
-  res.redirect('/tools');
+// DELETE – remove tool + all diagnostics linked to it
+
+exports.delete = async (req, res) => {
+  try {
+    const toolId = req.params.id;
+
+    // Ensure user owns this tool
+    await Tool.deleteOne({
+      _id: toolId,
+      createdBy: req.session.user._id
+    });
+
+    //  remove diagnostics related to this tool
+    await Diagnostic.deleteMany({ tool: toolId });
+
+    res.redirect('/tools');
+
+  } catch (err) {
+    console.log('Error deleting tool:', err);
+    res.redirect('/tools');
+  }
 };

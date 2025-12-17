@@ -1,0 +1,28 @@
+<%- include('../layout') %>
+
+<h1>Add Diagnostic for <%= tool.name %></h1>
+
+<form action="/diagnostics/<%= tool._id %>" method="POST">
+
+  <label>Attack Type</label>
+  <input type="text" name="attackType" required>
+
+  <label>Severity</label>
+  <select name="severity">
+    <option>Low</option>
+    <option>Medium</option>
+    <option>High</option>
+    <option>Critical</option>
+  </select>
+
+  <label>Notes</label>
+  <textarea name="note"></textarea>
+
+  <label>
+    <input type="checkbox" name="resolved"> Mark as Resolved
+  </label>
+
+  <button type="submit">Add Diagnostic</button>
+</form>
+
+<a href="/tools/<%= tool._id %>">Back to Tool</a>

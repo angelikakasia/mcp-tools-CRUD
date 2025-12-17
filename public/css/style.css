@@ -1,0 +1,106 @@
+/* Global page styling */
+body {
+  font-family: Arial, sans-serif;
+  background: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* NAVBAR */
+.navbar {
+  background: #1a1a1a;
+  color: white;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar a {
+  color: white;
+  margin-right: 15px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.navbar .logout {
+  background: #ff5252;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+/* PAGE LAYOUT */
+main {
+  max-width: 900px;
+  margin: 30px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* FORMS */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+input, textarea, select {
+  padding: 10px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+/* BUTTONS */
+button {
+  background: #1171f1;
+  color: white;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #0d5ec4;
+}
+
+/* TOOL CARDS */
+.tool-card {
+  border: 1px solid #ddd;
+  background: #ffffff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+}
+
+.severity-high {
+  color: #d00000;
+  font-weight: bold;
+}
+
+.severity-medium {
+  color: #ff8800;
+  font-weight: bold;
+}
+
+.severity-low {
+  color: #007f00;
+  font-weight: bold;
+}
+
+/* LINKS */
+a {
+  color: #1171f1;
+}
+
+a:hover {
+  text-decoration: underline;
+}

@@ -7,15 +7,19 @@ const isLoggedIn = require('../middleware/isLoggedIn');
 router.use(isLoggedIn);
 
 // CREATE Diagnostic
-router.post('/', diagnosticController.create);
+router.post('/:id', diagnosticController.create);
 
 // EDIT FORM
 router.get('/:id/edit', diagnosticController.renderEdit);
+
+// NEW FORM
+router.get('/:id/new', diagnosticController.renderNew);
 
 // UPDATE
 router.put('/:id', diagnosticController.update);
 
 // DELETE
 router.delete('/:id', diagnosticController.delete);
+
 
 module.exports = router;

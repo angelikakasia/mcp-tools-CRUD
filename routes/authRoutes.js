@@ -3,11 +3,12 @@ const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
 
+
 // Show signup form
-router.get('/signup', authController.renderSignup);
+router.get('/sign-up', authController.renderSignup);
 
 // Handle signup form
-router.post('/signup', authController.signup);
+router.post('/sign-up', authController.signup);
 
 // Show login form
 router.get('/login', authController.renderLogin);

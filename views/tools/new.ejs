@@ -3,6 +3,7 @@
 <h1>Add MCP Tool</h1>
 
 <form action="/tools" method="POST">
+
   <label>Name</label>
   <input type="text" name="name" required>
 
@@ -10,17 +11,19 @@
   <textarea name="description"></textarea>
 
   <label>Platform</label>
-  <input type="text" name="platform">
+  <input type="text" name="platform" placeholder="GitHub, Cursor, FastMCP" required>
 
-  <label>Tags (comma separated)</label>
-  <input type="text" name="tags">
+  <label>Tags (comma-separated)</label>
+  <input type="text" name="tags" placeholder="filesystem, read, high_privilege">
 
   <label>Risk Level</label>
-  <select name="riskLevel">
-    <option value="Low">Low</option>
-    <option value="Medium">Medium</option>
-    <option value="High">High</option>
+  <select name="riskLevel" required>
+    <option>Low</option>
+    <option>Medium</option>
+    <option>High</option>
   </select>
 
-  <button type="submit">Create Tool</button>
+  <button type="submit">Add Tool</button>
 </form>
+
+<a href="/tools">Back to Tools</a>

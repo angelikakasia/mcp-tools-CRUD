@@ -1,0 +1,17 @@
+<%- include('../layout') %>
+
+<h1>Diagnostic Detail</h1>
+
+<p><strong>Tool:</strong> <%= tool.name %></p>
+<p><strong>Attack Type:</strong> <%= diagnostic.attackType %></p>
+<p><strong>Severity:</strong> <%= diagnostic.severity %></p>
+<p><strong>Notes:</strong> <%= diagnostic.note %></p>
+<p><strong>Resolved:</strong> <%= diagnostic.resolved ? "Yes" : "No" %></p>
+
+<a href="/diagnostics/<%= tool._id %>/<%= diagnostic._id %>/edit">Edit</a>
+
+<form action="/diagnostics/<%= tool._id %>/<%= diagnostic._id %>?_method=DELETE" method="POST">
+  <button type="submit">Delete</button>
+</form>
+
+<a href="/tools/<%= tool._id %>">Back to Tool</a>

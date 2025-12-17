@@ -5,43 +5,31 @@
 <p><strong>Description:</strong> <%= tool.description %></p>
 <p><strong>Platform:</strong> <%= tool.platform %></p>
 <p><strong>Risk Level:</strong> <%= tool.riskLevel %></p>
+<p><strong>Tags:</strong> <%= tool.tags.join(', ') %></p>
 
 <a href="/tools/<%= tool._id %>/edit">Edit Tool</a>
+
+<form action="/tools/<%= tool._id %>?_method=DELETE" method="POST">
+  <button type="submit">Delete Tool</button>
+</form>
 
 <hr>
 
 <h2>Diagnostics</h2>
 
+<a href="/diagnostics/<%= tool._id %>/new">Add Diagnostic</a>
+
 <ul>
-  <% tool.diagnostics.forEach(d => { %>
+  <% tool.diagnostics.forEach(diag => { %>
     <li>
-      <strong><%= d.severity %></strong>: <%= d.note %>
+      <strong><%= diag.severity %></strong> — <%= diag.note %>
+      <a href="/diagnostics/<%= tool._id %>/<%= diag._id %>/edit">Edit</a>
 
-      <a href="/diagnostics/<%= d._id %>/edit">Edit</a>
-
-      <form method="POST" action="/diagnostics/<%= d._id %>?_method=DELETE" style="display:inline;">
-        <button>Delete</button>
+      <form action="/diagnostics/<%= tool._id %>/<%= diag._id %>?_method=DELETE" method="POST">
+        <button type="submit">Delete</button>
       </form>
     </li>
   <% }) %>
 </ul>
 
-<hr>
-
-<h3>Add Diagnostic</h3>
-
-<form action="/diagnostics" method="POST">
-  <input type="hidden" name="toolId" value="<%= tool._id %>">
-
-  <label>Severity</label>
-  <select name="severity">
-    <option value="Low">Low</option>
-    <option value="Medium">Medium</option>
-    <option value="High">High</option>
-  </select>
-
-  <label>Note</label>
-  <textarea name="note"></textarea>
-
-  <button type="submit">Add Diagnostic</button>
-</form>
+<a href="/tools">Back to Tools</a>
