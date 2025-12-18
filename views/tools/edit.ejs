@@ -1,29 +1,65 @@
 <%- include('../layout') %>
 
-<h1>Edit Tool</h1>
+<main class="container">
+  <section class="tool-card">
 
-<form action="/tools/<%= tool._id %>?_method=PUT" method="POST">
+    <h1>Edit Tool</h1>
+    <p class="subtitle">
+      Update details for <strong><%= tool.name %></strong>
+    </p>
 
-  <label>Name</label>
-  <input type="text" name="name" value="<%= tool.name %>" required>
+    <form action="/tools/<%= tool._id %>?_method=PUT" method="POST">
 
-  <label>Platform</label>
-  <input type="text" name="platform" value="<%= tool.platform %>" required>
+      <label for="name">Name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value="<%= tool.name %>"
+        required
+      >
 
-  <label>Risk Level</label>
-  <select name="riskLevel">
-    <option <%= tool.riskLevel === "Low" ? "selected" : "" %>>Low</option>
-    <option <%= tool.riskLevel === "Medium" ? "selected" : "" %>>Medium</option>
-    <option <%= tool.riskLevel === "High" ? "selected" : "" %>>High</option>
-  </select>
+      <label for="platform">Platform</label>
+      <input
+        type="text"
+        id="platform"
+        name="platform"
+        value="<%= tool.platform %>"
+        required
+      >
 
-  <label>Description</label>
-  <textarea name="description"><%= tool.description %></textarea>
+      <label for="riskLevel">Risk Level</label>
+      <select id="riskLevel" name="riskLevel">
+        <option <%= tool.riskLevel === "Low" ? "selected" : "" %>>Low</option>
+        <option <%= tool.riskLevel === "Medium" ? "selected" : "" %>>Medium</option>
+        <option <%= tool.riskLevel === "High" ? "selected" : "" %>>High</option>
+      </select>
 
-  <label>Tags</label>
-  <input type="text" name="tags" value="<%= tool.tags.join(', ') %>">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        name="description"
+        rows="4"
+      ><%= tool.description %></textarea>
 
-  <button type="submit">Update Tool</button>
-</form>
+      <label for="tags">Tags (comma-separated)</label>
+      <input
+        type="text"
+        id="tags"
+        name="tags"
+        value="<%= tool.tags.join(', ') %>"
+      >
 
-<a href="/tools/<%= tool._id %>">Cancel</a>
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">
+          Update Tool
+        </button>
+        <a href="/tools/<%= tool._id %>" class="btn-ghost">
+          Cancel
+        </a>
+      </div>
+
+    </form>
+
+  </section>
+</main>

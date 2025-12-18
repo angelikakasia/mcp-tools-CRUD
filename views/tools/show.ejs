@@ -1,35 +1,81 @@
 <%- include('../layout') %>
 
-<h1><%= tool.name %></h1>
+<main class="container">
 
-<p><strong>Description:</strong> <%= tool.description %></p>
-<p><strong>Platform:</strong> <%= tool.platform %></p>
-<p><strong>Risk Level:</strong> <%= tool.riskLevel %></p>
-<p><strong>Tags:</strong> <%= tool.tags.join(', ') %></p>
+  <!-- TOOL CARD -->
+  <section class="tool-card">
+    <h1><%= tool.name %></h1>
 
-<a href="/tools/<%= tool._id %>/edit">Edit Tool</a>
+    <p><strong>Description:</strong> <%= tool.description %></p>
+    <p><strong>Platform:</strong> <%= tool.platform %></p>
+    <p>
+      <strong>Risk Level:</strong>
+      <span class="severity-<%= tool.riskLevel.toLowerCase() %>">
+        <%= tool.riskLevel %>
+      </span>
+    </p>
 
-<form action="/tools/<%= tool._id %>?_method=DELETE" method="POST">
-  <button type="submit">Delete Tool</button>
-</form>
+    <p>
+      <strong>Tags:</strong>
+      <%= tool.tags.join(', ') %>
+    </p>
 
-<hr>
+    <div class="action-row">
+      <a href="/tools/<%= tool._id %>/edit" class="btn-secondary">Edit Tool</a>
 
-<h2>Diagnostics</h2>
-
-<a href="/diagnostics/<%= tool._id %>/new">Add Diagnostic</a>
-
-<ul>
-  <% tool.diagnostics.forEach(diag => { %>
-    <li>
-      <strong><%= diag.severity %></strong> — <%= diag.note %>
-      <a href="/diagnostics/<%= tool._id %>/<%= diag._id %>/edit">Edit</a>
-
-      <form action="/diagnostics/<%= tool._id %>/<%= diag._id %>?_method=DELETE" method="POST">
-        <button type="submit">Delete</button>
+      <form
+        action="/tools/<%= tool._id %>?_method=DELETE"
+        method="POST"
+        onsubmit="return confirm('Delete this tool?');"
+      >
+        <button type="submit" class="btn-danger">Delete Tool</button>
       </form>
-    </li>
-  <% }) %>
-</ul>
+    </div>
+  </section>
 
-<a href="/tools">Back to Tools</a>
+  <!-- DIAGNOSTICS -->
+  <section class="tool-card">
+    <div class="section-header">
+      <h2>Diagnostics</h2>
+      <a href="/diagnostics/<%= tool._id %>/new" class="btn-primary">
+        Add Diagnostic
+      </a>
+    </div>
+
+    <% if (tool.diagnostics.length === 0) { %>
+      <p class="empty-state">No diagnostics added yet.</p>
+    <% } else { %>
+      <ul class="diagnostic-list">
+        <% tool.diagnostics.forEach(diag => { %>
+          <li class="diagnostic-item">
+            <span class="severity-<%= diag.severity.toLowerCase() %>">
+              <%= diag.severity %>
+            </span>
+
+            <span class="diagnostic-note"><%= diag.note %></span>
+
+            <div class="diag-actions">
+              <a
+                href="/diagnostics/<%= tool._id %>/<%= diag._id %>/edit"
+                class="btn-ghost"
+              >
+                Edit
+              </a>
+
+              <form
+                action="/diagnostics/<%= tool._id %>/<%= diag._id %>?_method=DELETE"
+                method="POST"
+                onsubmit="return confirm('Delete this diagnostic?');"
+              >
+                <button type="submit" class="btn-danger-sm">Delete</button>
+              </form>
+            </div>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </section>
+
+  <a href="/tools" class="btn-ghost">← Back to Tools</a>
+
+</main>

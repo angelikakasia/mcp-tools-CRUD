@@ -1,29 +1,64 @@
 <%- include('../layout') %>
 
-<h1>Add MCP Tool</h1>
+<main class="container">
+  <section class="tool-card">
 
-<form action="/tools" method="POST">
+    <h1>Add MCP Tool</h1>
+    <p class="subtitle">
+      Create a new tool and define its risk profile.
+    </p>
 
-  <label>Name</label>
-  <input type="text" name="name" required>
+    <form action="/tools" method="POST">
 
-  <label>Description</label>
-  <textarea name="description"></textarea>
+      <label for="name">Name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        required
+      >
 
-  <label>Platform</label>
-  <input type="text" name="platform" placeholder="GitHub, Cursor, FastMCP" required>
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        name="description"
+        rows="4"
+      ></textarea>
 
-  <label>Tags (comma-separated)</label>
-  <input type="text" name="tags" placeholder="filesystem, read, high_privilege">
+      <label for="platform">Platform</label>
+      <input
+        type="text"
+        id="platform"
+        name="platform"
+        placeholder="GitHub, Cursor, FastMCP"
+        required
+      >
 
-  <label>Risk Level</label>
-  <select name="riskLevel" required>
-    <option>Low</option>
-    <option>Medium</option>
-    <option>High</option>
-  </select>
+      <label for="tags">Tags (comma-separated)</label>
+      <input
+        type="text"
+        id="tags"
+        name="tags"
+        placeholder="filesystem, read, high_privilege"
+      >
 
-  <button type="submit">Add Tool</button>
-</form>
+      <label for="riskLevel">Risk Level</label>
+      <select id="riskLevel" name="riskLevel" required>
+        <option>Low</option>
+        <option>Medium</option>
+        <option>High</option>
+      </select>
 
-<a href="/tools">Back to Tools</a>
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">
+          Add Tool
+        </button>
+        <a href="/tools" class="btn-ghost">
+          Cancel
+        </a>
+      </div>
+
+    </form>
+
+  </section>
+</main>

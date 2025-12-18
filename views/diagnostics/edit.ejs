@@ -1,28 +1,61 @@
 <%- include('../layout') %>
 
-<h1>Edit Diagnostic for <%= tool.name %></h1>
+<main class="container">
+  <section class="tool-card">
 
-<form action="/diagnostics/<%= tool._id %>/<%= diagnostic._id %>?_method=PUT" method="POST">
+    <h1>Edit Diagnostic</h1>
+    <p class="subtitle">
+      For tool: <strong><%= tool.name %></strong>
+    </p>
 
-  <label>Attack Type</label>
-  <input type="text" name="attackType" value="<%= diagnostic.attackType %>" required>
+    <form
+      action="/diagnostics/<%= tool._id %>/<%= diagnostic._id %>?_method=PUT"
+      method="POST"
+    >
 
-  <label>Severity</label>
-  <select name="severity">
-    <option value="Low" <%= diagnostic.severity === "Low" ? "selected" : "" %>>Low</option>
-    <option value="Medium" <%= diagnostic.severity === "Medium" ? "selected" : "" %>>Medium</option>
-    <option value="High" <%= diagnostic.severity === "High" ? "selected" : "" %>>High</option>
-    <option value="Critical" <%= diagnostic.severity === "Critical" ? "selected" : "" %>>Critical</option>
-  </select>
+      <label for="attackType">Attack Type</label>
+      <input
+        type="text"
+        id="attackType"
+        name="attackType"
+        value="<%= diagnostic.attackType %>"
+        required
+      >
 
-  <label>Notes</label>
-  <textarea name="note"><%= diagnostic.note %></textarea>
+      <label for="severity">Severity</label>
+      <select id="severity" name="severity">
+        <option value="Low" <%= diagnostic.severity === "Low" ? "selected" : "" %>>Low</option>
+        <option value="Medium" <%= diagnostic.severity === "Medium" ? "selected" : "" %>>Medium</option>
+        <option value="High" <%= diagnostic.severity === "High" ? "selected" : "" %>>High</option>
+        <option value="Critical" <%= diagnostic.severity === "Critical" ? "selected" : "" %>>Critical</option>
+      </select>
 
-  <label>
-    <input type="checkbox" name="resolved" <%= diagnostic.resolved ? "checked" : "" %>> Resolved
-  </label>
+      <label for="note">Notes</label>
+      <textarea
+        id="note"
+        name="note"
+        rows="4"
+      ><%= diagnostic.note %></textarea>
 
-  <button type="submit">Update Diagnostic</button>
-</form>
+      <label class="checkbox-row">
+        <input
+          type="checkbox"
+          name="resolved"
+          <%= diagnostic.resolved ? "checked" : "" %>
+        >
+        <span>Mark as Resolved</span>
+      </label>
 
-<a href="/tools/<%= tool._id %>">Back to Tool</a>
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">
+          Update Diagnostic
+        </button>
+        <a href="/tools/<%= tool._id %>" class="btn-ghost">
+          Cancel
+        </a>
+      </div>
+
+    </form>
+
+  </section>
+</main>

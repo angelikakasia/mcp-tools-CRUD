@@ -1,17 +1,59 @@
 <%- include('../layout') %>
 
-<h1>Diagnostic Detail</h1>
+<main class="container">
+  <section class="tool-card">
 
-<p><strong>Tool:</strong> <%= tool.name %></p>
-<p><strong>Attack Type:</strong> <%= diagnostic.attackType %></p>
-<p><strong>Severity:</strong> <%= diagnostic.severity %></p>
-<p><strong>Notes:</strong> <%= diagnostic.note %></p>
-<p><strong>Resolved:</strong> <%= diagnostic.resolved ? "Yes" : "No" %></p>
+    <h1>Diagnostic Detail</h1>
+    <p class="subtitle">
+      For tool: <strong><%= tool.name %></strong>
+    </p>
 
-<a href="/diagnostics/<%= tool._id %>/<%= diagnostic._id %>/edit">Edit</a>
+    <div class="detail-row">
+      <span class="detail-label">Attack Type</span>
+      <span><%= diagnostic.attackType %></span>
+    </div>
 
-<form action="/diagnostics/<%= tool._id %>/<%= diagnostic._id %>?_method=DELETE" method="POST">
-  <button type="submit">Delete</button>
-</form>
+    <div class="detail-row">
+      <span class="detail-label">Severity</span>
+      <span class="severity-<%= diagnostic.severity.toLowerCase() %>">
+        <%= diagnostic.severity %>
+      </span>
+    </div>
 
-<a href="/tools/<%= tool._id %>">Back to Tool</a>
+    <div class="detail-row">
+      <span class="detail-label">Notes</span>
+      <span><%= diagnostic.note || '—' %></span>
+    </div>
+
+    <div class="detail-row">
+      <span class="detail-label">Resolved</span>
+      <span>
+        <%= diagnostic.resolved ? 'Yes' : 'No' %>
+      </span>
+    </div>
+
+    <div class="form-actions">
+      <a
+        href="/diagnostics/<%= tool._id %>/<%= diagnostic._id %>/edit"
+        class="btn-secondary"
+      >
+        Edit
+      </a>
+
+      <form
+        action="/diagnostics/<%= tool._id %>/<%= diagnostic._id %>?_method=DELETE"
+        method="POST"
+        onsubmit="return confirm('Delete this diagnostic?');"
+      >
+        <button type="submit" class="btn-danger">
+          Delete
+        </button>
+      </form>
+
+      <a href="/tools/<%= tool._id %>" class="btn-ghost">
+        Back to Tool
+      </a>
+    </div>
+
+  </section>
+</main>

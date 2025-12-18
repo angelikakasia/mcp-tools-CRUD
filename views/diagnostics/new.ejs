@@ -1,43 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Add Diagnostic</title>
+<%- include('../layout') %>
 
-  <link rel="stylesheet" href="/css/style.css" />
-</head>
+<main class="container">
+  <section class="tool-card">
 
-<body>
+    <h1>Add Diagnostic</h1>
+    <p class="subtitle">
+      For tool: <strong><%= tool.name %></strong>
+    </p>
 
-  <%- include('../layout') %>
+    <form action="/diagnostics/<%= tool._id %>" method="POST">
 
-  <h1>Add Diagnostic for <%= tool.name %></h1>
+      <label for="attackType">Attack Type</label>
+      <input
+        type="text"
+        id="attackType"
+        name="attackType"
+        required
+      >
 
-  <form action="/diagnostics/<%= tool._id %>" method="POST">
+      <label for="severity">Severity</label>
+      <select id="severity" name="severity">
+        <option>Low</option>
+        <option>Medium</option>
+        <option>High</option>
+        <option>Critical</option>
+      </select>
 
-    <label>Attack Type</label>
-    <input type="text" name="attackType" required>
+      <label for="note">Notes</label>
+      <textarea id="note" name="note" rows="4"></textarea>
 
-    <label>Severity</label>
-    <select name="severity">
-      <option>Low</option>
-      <option>Medium</option>
-      <option>High</option>
-      <option>Critical</option>
-    </select>
+      <label class="checkbox-row">
+        <input type="checkbox" name="resolved">
+        <span>Mark as Resolved</span>
+      </label>
 
-    <label>Notes</label>
-    <textarea name="note"></textarea>
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">
+          Add Diagnostic
+        </button>
+        <a href="/tools/<%= tool._id %>" class="btn-ghost">
+          Cancel
+        </a>
+      </div>
 
-    <label>
-      <input type="checkbox" name="resolved"> Mark as Resolved
-    </label>
+    </form>
 
-    <button type="submit">Add Diagnostic</button>
-  </form>
-
-  <a href="/tools/<%= tool._id %>">Back to Tool</a>
-
-</body>
-</html>
+  </section>
+</main>

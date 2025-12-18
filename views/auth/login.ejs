@@ -1,19 +1,50 @@
 <%- include('../layout') %>
 
-<h1>Login</h1>
+<main class="container">
+  <section class="tool-card">
 
-<% if (typeof error !== "undefined") { %>
-  <p class="error"><%= error %></p>
-<% } %>
+    <h1>Log In</h1>
+    <p class="subtitle">
+      Access your MCP tools and diagnostics.
+    </p>
 
-<form method="POST" action="/login">
-  <label>Email</label>
-  <input type="email" name="email" required>
+    <% if (typeof error !== "undefined") { %>
+      <p class="error-message"><%= error %></p>
+    <% } %>
 
-  <label>Password</label>
-  <input type="password" name="password" required>
+    <form method="POST" action="/auth/login">
 
-  <button type="submit">Login</button>
-</form>
+      <label for="username">Email</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        required
+      >
 
-<p>No account? <a href="/signup">Sign up</a></p>
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        required
+      >
+
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">
+          Log In
+        </button>
+        <a href="/" class="btn-ghost">
+          Cancel
+        </a>
+      </div>
+
+    </form>
+
+    <p class="form-footer">
+      No account?
+      <a href="/auth/signup">Sign up</a>
+    </p>
+
+  </section>
+</main>
