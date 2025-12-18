@@ -393,3 +393,80 @@ label {
   color: #6b7280;
   margin-bottom: 1.25rem;
 }
+/* ===== Tools Index Page ===== */
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.section-header h1 {
+  margin: 0;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  color: #6b7280;
+  font-size: 1rem;
+  margin-top: 2rem;
+}
+
+/* Grid of tools */
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Individual tool card */
+.tool-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 1.25rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tool-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.tool-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.tool-card h3 a {
+  text-decoration: none;
+  color: #111827;
+}
+
+.tool-card p {
+  margin: 0.25rem 0;
+}
+
+/* Risk severity colors */
+.severity-low {
+  color: #15803d;
+  font-weight: 600;
+}
+
+.severity-medium {
+  color: #b45309;
+  font-weight: 600;
+}
+
+.severity-high {
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+/* Buttons spacing */
+.tool-card .btn-secondary {
+  display: inline-block;
+  margin-top: 0.75rem;
+}
