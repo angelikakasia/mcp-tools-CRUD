@@ -302,3 +302,94 @@ label {
   border-radius: 6px;
   margin-bottom: 1rem;
 }
+/*  Layout container  */
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+/*  Card wrapper  */
+.tool-card {
+  background: #ffffff;
+  padding: 24px 28px;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+/*  Form layout  */
+.form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Labels */
+.form-stack label {
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+/* Inputs, selects, textarea */
+.form-stack input[type="text"],
+.form-stack select,
+.form-stack textarea {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 0.95rem;
+  width: 100%;
+}
+
+.form-stack textarea {
+  resize: vertical;
+}
+
+/* Checkbox row */
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* ===== Buttons row ===== */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Primary button */
+.btn-primary {
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
+/* Ghost button */
+.btn-ghost {
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  color: #2563eb;
+  border: 1px solid #2563eb;
+}
+
+.btn-ghost:hover {
+  background-color: #eff6ff;
+}
+
+/* Subtitle */
+.subtitle {
+  color: #6b7280;
+  margin-bottom: 1.25rem;
+}

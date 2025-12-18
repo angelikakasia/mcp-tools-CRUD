@@ -1,61 +1,76 @@
-<%- include('../layout') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Diagnostic</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
 
-<main class="container">
-  <section class="tool-card">
+<body>
 
-    <h1>Edit Diagnostic</h1>
-    <p class="subtitle">
-      For tool: <strong><%= tool.name %></strong>
-    </p>
+  <%- include('../layout') %>
 
-    <form
-      action="/diagnostics/<%= tool._id %>/<%= diagnostic._id %>?_method=PUT"
-      method="POST"
-    >
+  <main class="container">
+    <section class="tool-card">
 
-      <label for="attackType">Attack Type</label>
-      <input
-        type="text"
-        id="attackType"
-        name="attackType"
-        value="<%= diagnostic.attackType %>"
-        required
+      <h1>Edit Diagnostic</h1>
+      <p class="subtitle">
+        For tool: <strong><%= tool.name %></strong>
+      </p>
+
+      <form
+        action="/diagnostics/<%= tool._id %>/<%= diagnostic._id %>?_method=PUT"
+        method="POST"
+        class="form-stack"
       >
 
-      <label for="severity">Severity</label>
-      <select id="severity" name="severity">
-        <option value="Low" <%= diagnostic.severity === "Low" ? "selected" : "" %>>Low</option>
-        <option value="Medium" <%= diagnostic.severity === "Medium" ? "selected" : "" %>>Medium</option>
-        <option value="High" <%= diagnostic.severity === "High" ? "selected" : "" %>>High</option>
-        <option value="Critical" <%= diagnostic.severity === "Critical" ? "selected" : "" %>>Critical</option>
-      </select>
-
-      <label for="note">Notes</label>
-      <textarea
-        id="note"
-        name="note"
-        rows="4"
-      ><%= diagnostic.note %></textarea>
-
-      <label class="checkbox-row">
+        <label for="attackType">Attack Type</label>
         <input
-          type="checkbox"
-          name="resolved"
-          <%= diagnostic.resolved ? "checked" : "" %>
-        >
-        <span>Mark as Resolved</span>
-      </label>
+          type="text"
+          id="attackType"
+          name="attackType"
+          value="<%= diagnostic.attackType %>"
+          required
+        />
 
-      <div class="form-actions">
-        <button type="submit" class="btn-primary">
-          Update Diagnostic
-        </button>
-        <a href="/tools/<%= tool._id %>" class="btn-ghost">
-          Cancel
-        </a>
-      </div>
+        <label for="severity">Severity</label>
+        <select id="severity" name="severity">
+          <option value="Low" <%= diagnostic.severity === "Low" ? "selected" : "" %>>Low</option>
+          <option value="Medium" <%= diagnostic.severity === "Medium" ? "selected" : "" %>>Medium</option>
+          <option value="High" <%= diagnostic.severity === "High" ? "selected" : "" %>>High</option>
+          <option value="Critical" <%= diagnostic.severity === "Critical" ? "selected" : "" %>>Critical</option>
+        </select>
 
-    </form>
+        <label for="note">Notes</label>
+        <textarea
+          id="note"
+          name="note"
+          rows="4"
+        ><%= diagnostic.note %></textarea>
 
-  </section>
-</main>
+        <label class="checkbox-row">
+          <input
+            type="checkbox"
+            name="resolved"
+            <%= diagnostic.resolved ? "checked" : "" %>
+          />
+          <span>Mark as Resolved</span>
+        </label>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">
+            Update Diagnostic
+          </button>
+          <a href="/tools/<%= tool._id %>" class="btn-ghost">
+            Cancel
+          </a>
+        </div>
+
+      </form>
+
+    </section>
+  </main>
+
+</body>
+</html>

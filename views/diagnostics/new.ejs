@@ -1,49 +1,54 @@
-<%- include('../layout') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Diagnostic</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
 
-<main class="container">
-  <section class="tool-card">
+<body>
 
-    <h1>Add Diagnostic</h1>
-    <p class="subtitle">
-      For tool: <strong><%= tool.name %></strong>
-    </p>
+  <%- include('../layout') %>
 
-    <form action="/diagnostics/<%= tool._id %>" method="POST">
+  <main class="container">
+    <section class="tool-card">
 
-      <label for="attackType">Attack Type</label>
-      <input
-        type="text"
-        id="attackType"
-        name="attackType"
-        required
-      >
+      <h1>Add Diagnostic</h1>
+      <p class="subtitle">
+        For tool: <strong><%= tool.name %></strong>
+      </p>
 
-      <label for="severity">Severity</label>
-      <select id="severity" name="severity">
-        <option>Low</option>
-        <option>Medium</option>
-        <option>High</option>
-        <option>Critical</option>
-      </select>
+      <form action="/diagnostics/<%= tool._id %>" method="POST" class="form-stack">
 
-      <label for="note">Notes</label>
-      <textarea id="note" name="note" rows="4"></textarea>
+        <label for="attackType">Attack Type</label>
+        <input type="text" id="attackType" name="attackType" required />
 
-      <label class="checkbox-row">
-        <input type="checkbox" name="resolved">
-        <span>Mark as Resolved</span>
-      </label>
+        <label for="severity">Severity</label>
+        <select id="severity" name="severity">
+          <option>Low</option>
+          <option>Medium</option>
+          <option>High</option>
+          <option>Critical</option>
+        </select>
 
-      <div class="form-actions">
-        <button type="submit" class="btn-primary">
-          Add Diagnostic
-        </button>
-        <a href="/tools/<%= tool._id %>" class="btn-ghost">
-          Cancel
-        </a>
-      </div>
+        <label for="note">Notes</label>
+        <textarea id="note" name="note" rows="4"></textarea>
 
-    </form>
+        <label class="checkbox-row">
+          <input type="checkbox" name="resolved" />
+          <span>Mark as Resolved</span>
+        </label>
 
-  </section>
-</main>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Add Diagnostic</button>
+          <a href="/tools/<%= tool._id %>" class="btn-ghost">Cancel</a>
+        </div>
+
+      </form>
+
+    </section>
+  </main>
+
+</body>
+</html>
