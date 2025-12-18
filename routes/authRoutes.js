@@ -5,10 +5,10 @@ const authController = require('../controllers/authController');
 
 
 // Show signup form
-router.get('/sign-up', authController.renderSignup);
+router.get('/signup', authController.renderSignup);
 
 // Handle signup form
-router.post('/sign-up', authController.signup);
+router.post('/signup', authController.signup);
 
 // Show login form
 router.get('/login', authController.renderLogin);

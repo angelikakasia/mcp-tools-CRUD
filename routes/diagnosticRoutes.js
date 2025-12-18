@@ -10,16 +10,15 @@ router.use(isLoggedIn);
 router.post('/:id', diagnosticController.create);
 
 // EDIT FORM
-router.get('/:id/edit', diagnosticController.renderEdit);
+router.get('/:toolId/:diagnosticId/edit', diagnosticController.renderEdit);
 
 // NEW FORM
 router.get('/:id/new', diagnosticController.renderNew);
 
 // UPDATE
-router.put('/:id', diagnosticController.update);
+router.put('/:toolId/:diagnosticId', diagnosticController.update);
 
 // DELETE
-router.delete('/:id', diagnosticController.delete);
-
+router.delete('/:toolId/:diagnosticId', diagnosticController.deleteDiagnostic);
 
 module.exports = router;

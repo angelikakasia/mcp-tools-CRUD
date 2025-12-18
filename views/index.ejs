@@ -1,23 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Home Page</title>
-    </head>
-    <body>
-      
-        <% if (user) { %>
-        <h1>Welcome MCP Tool Tracker, <%= user.username %>!</h1>
-        <p>
-            <a href="/auth/sign-out">Sign out</a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MCP Tool Tracker</title>
+
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+
+  <%- include('layout') %>
+
+  <main class="container">
+    <section class="hero">
+      <% if (user) { %>
+        <h1>Welcome back, <span><%= user.username %></span></h1>
+        <p class="subtitle">
+          Track and manage your MCP tools and diagnostics in one place.
         </p>
-        <% } else { %>
-        <h1>Welcome MCP Tool Tracker, guest.</h1>
-        <p>
-            <a href="/auth/sign-up">Sign up</a> or
-            <a href="/auth/sign-in">sign in</a>.
+
+        <div class="hero-actions">
+          <a href="/tools" class="btn-primary">View My Tools</a>
+          <a href="/tools/new" class="btn-secondary">Add New Tool</a>
+        </div>
+      <% } else { %>
+        <h1>Welcome to MCP Tool Tracker</h1>
+        <p class="subtitle">
+          A simple way to organize tools and diagnostics securely.
         </p>
-        <% } %>
-    </body>
+
+        <div class="hero-actions">
+          <a href="/auth/signup" class="btn-primary">Create an Account</a>
+          <a href="/auth/login" class="btn-secondary">Sign In</a>
+        </div>
+      <% } %>
+    </section>
+  </main>
+
+</body>
 </html>

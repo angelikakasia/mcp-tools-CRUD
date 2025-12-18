@@ -1,8 +1,12 @@
 const Diagnostic = require('../models/diagnostic');
 const Tool = require('../models/tool');
 
+
+
+
+
 // CREATE diagnostic
-exports.create = async (req, res) => {
+const create = async (req, res) => {
   try {
     const tool = await Tool.findOne({
       _id: req.params.id,
@@ -30,16 +34,20 @@ exports.create = async (req, res) => {
 };
 
 // EDIT FORM
-exports.renderEdit = async (req, res) => {
+const renderEdit = async (req, res) => {
   try {
-    const diagnostic = await Diagnostic.findOne({
-      _id: req.params.diagnosticId,
+    const tool = await Tool.findOne({
+      _id: req.params.toolId,
       createdBy: req.session.user._id
-    }).populate('tool');
+    });
 
-    if (!diagnostic) return res.redirect('/tools');
+    if (!tool) return res.redirect('/tools');
+    const diagnostic = tool.diagnostics.id(req.params.diagnosticId);
+    console.log("Diagnostic")
+    if (!tool.diagnostics.id(req.params.diagnosticId)   
+    ) return res.redirect('/tools');
 
-    res.render('diagnostics/edit', { diagnostic, tool: diagnostic.tool });
+    res.render('diagnostics/edit', { diagnostic, tool });
 
   } catch (err) {
     console.log('Error loading edit form:', err);
@@ -47,7 +55,7 @@ exports.renderEdit = async (req, res) => {
   }
 };
 // render new new form
-exports.renderNew = async (req, res) => {
+const renderNew = async (req, res) => {
   try {
     const tool = await Tool.findOne({
       _id: req.params.id,
@@ -65,7 +73,7 @@ exports.renderNew = async (req, res) => {
 };
 
 // UPDATE diagnostic
-exports.update = async (req, res) => {
+const update = async (req, res) => {
   try {
     const diagnostic = await Diagnostic.findOne({
       _id: req.params.diagnosticId,
@@ -90,7 +98,7 @@ exports.update = async (req, res) => {
 };
 
 // DELETE diagnostic
-exports.delete = async (req, res) => {
+const deleteDiagnostic = async (req, res) => {
   try {
     const diagnostic = await Diagnostic.findOne({
       _id: req.params.diagnosticId,
@@ -109,4 +117,11 @@ exports.delete = async (req, res) => {
     console.log('Error deleting diagnostic:', err);
     res.redirect('/tools');
   }
+};
+module.exports = {
+    create,
+    renderEdit,
+    renderNew,
+    update,
+    deleteDiagnostic                
 };

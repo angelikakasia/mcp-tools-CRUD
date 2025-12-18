@@ -25,6 +25,6 @@ router.get('/:id/edit', toolController.renderEdit);
 router.put('/:id', toolController.update);
 
 // DELETE
-router.delete('/:id', toolController.delete);
+router.delete('/:id', toolController.deleteTool);
 
 module.exports = router;

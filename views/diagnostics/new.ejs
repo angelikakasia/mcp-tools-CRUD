@@ -1,28 +1,43 @@
-<%- include('../layout') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Diagnostic</title>
 
-<h1>Add Diagnostic for <%= tool.name %></h1>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
 
-<form action="/diagnostics/<%= tool._id %>" method="POST">
+<body>
 
-  <label>Attack Type</label>
-  <input type="text" name="attackType" required>
+  <%- include('../layout') %>
 
-  <label>Severity</label>
-  <select name="severity">
-    <option>Low</option>
-    <option>Medium</option>
-    <option>High</option>
-    <option>Critical</option>
-  </select>
+  <h1>Add Diagnostic for <%= tool.name %></h1>
 
-  <label>Notes</label>
-  <textarea name="note"></textarea>
+  <form action="/diagnostics/<%= tool._id %>" method="POST">
 
-  <label>
-    <input type="checkbox" name="resolved"> Mark as Resolved
-  </label>
+    <label>Attack Type</label>
+    <input type="text" name="attackType" required>
 
-  <button type="submit">Add Diagnostic</button>
-</form>
+    <label>Severity</label>
+    <select name="severity">
+      <option>Low</option>
+      <option>Medium</option>
+      <option>High</option>
+      <option>Critical</option>
+    </select>
 
-<a href="/tools/<%= tool._id %>">Back to Tool</a>
+    <label>Notes</label>
+    <textarea name="note"></textarea>
+
+    <label>
+      <input type="checkbox" name="resolved"> Mark as Resolved
+    </label>
+
+    <button type="submit">Add Diagnostic</button>
+  </form>
+
+  <a href="/tools/<%= tool._id %>">Back to Tool</a>
+
+</body>
+</html>

@@ -1,13 +1,15 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 
+
+
 // RENDER SIGNUP PAGE
-exports.renderSignup = (req, res) => {
+const renderSignup = (req, res) => {
   res.render('auth/signup');
 };
 
 // SIGNUP USER
-exports.signup = async (req, res) => {
+const signup = async (req, res) => {
   try {
     const userExists = await User.findOne({ username: req.body.username });
 
@@ -37,12 +39,12 @@ exports.signup = async (req, res) => {
 };
 
 // RENDER LOGIN PAGE
-exports.renderLogin = (req, res) => {
+const renderLogin = (req, res) => {
   res.render('auth/login');
 };
 
 // LOGIN USER
-exports.login = async (req, res) => {
+const login = async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
 
@@ -71,8 +73,16 @@ exports.login = async (req, res) => {
 };
 
 // LOGOUT USER
-exports.logout = (req, res) => {
+const logout = (req, res) => {
   req.session.destroy(() => {
-    res.redirect('/login');
+    res.redirect('/auth/login');
   });
+};
+
+module.exports = {
+    renderSignup,
+    signup,
+    renderLogin,
+    login,
+    logout
 };

@@ -2,9 +2,12 @@ const Tool = require('../models/tool');
 const Diagnostic = require('../models/diagnostic'); // tools and diagnostics are related
 
 
+
+
+
 // INDEX – show all tools that belong to logged-in user
 
-exports.index = async (req, res) => {
+const index = async (req, res) => {
   try {
     const tools = await Tool.find({ createdBy: req.session.user._id });
 
@@ -19,7 +22,7 @@ exports.index = async (req, res) => {
 
 // NEW – render form to create a new tool
 
-exports.renderNew = (req, res) => {
+const renderNew = (req, res) => {
   res.render('tools/new');
 };
 
@@ -27,7 +30,7 @@ exports.renderNew = (req, res) => {
 
 // CREATE – add new tool for logged-in user
 
-exports.create = async (req, res) => {
+const create = async (req, res) => {
   try {
     const tagsArray = req.body.tags
       ? req.body.tags.split(',').map(tag => tag.trim())
@@ -53,7 +56,7 @@ exports.create = async (req, res) => {
 
 // SHOW – display one tool + its diagnostics
 
-exports.show = async (req, res) => {
+const show = async (req, res) => {
   try {
     // Find tool only if it belongs to the logged-in user
     const tool = await Tool.findOne({
@@ -78,7 +81,7 @@ exports.show = async (req, res) => {
 
 // EDIT – show edit form for a tool
 
-exports.renderEdit = async (req, res) => {
+const renderEdit = async (req, res) => {
   try {
     const tool = await Tool.findOne({
       _id: req.params.id,
@@ -99,7 +102,7 @@ exports.renderEdit = async (req, res) => {
 
 // UPDATE – update an existing tool
 
-exports.update = async (req, res) => {
+const update = async (req, res) => {
   try {
     const tool = await Tool.findOne({
       _id: req.params.id,
@@ -129,7 +132,7 @@ exports.update = async (req, res) => {
 
 // DELETE – remove tool + all diagnostics linked to it
 
-exports.delete = async (req, res) => {
+const deleteTool = async (req, res) => {
   try {
     const toolId = req.params.id;
 
@@ -148,4 +151,13 @@ exports.delete = async (req, res) => {
     console.log('Error deleting tool:', err);
     res.redirect('/tools');
   }
+};
+module.exports = {
+    index,
+    renderNew,
+    create,
+    show,
+    renderEdit,
+    update,
+    deleteTool                
 };
