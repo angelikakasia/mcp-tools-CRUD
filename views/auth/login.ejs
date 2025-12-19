@@ -1,50 +1,64 @@
-<%- include('../layout') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Log In</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
 
-<main class="container">
-  <section class="tool-card">
+<body>
 
-    <h1>Log In</h1>
-    <p class="subtitle">
-      Access your MCP tools and diagnostics.
-    </p>
+  <%- include('../layout') %>
 
-    <% if (typeof error !== "undefined") { %>
-      <p class="error-message"><%= error %></p>
-    <% } %>
+  <main class="container">
+    <section class="tool-card auth-card">
 
-    <form method="POST" action="/auth/login">
+      <h1>Log In</h1>
+      <p class="subtitle">
+        Access your MCP tools and diagnostics.
+      </p>
 
-      <label for="username">Email</label>
-      <input
-        type="text"
-        id="username"
-        name="username"
-        required
-      >
+      <% if (typeof error !== "undefined") { %>
+        <p class="error"><%= error %></p>
+      <% } %>
 
-      <label for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        required
-      >
+      <form method="POST" action="/auth/login" class="form-stack">
 
-      <div class="form-actions">
-        <button type="submit" class="btn-primary">
-          Log In
-        </button>
-        <a href="/" class="btn-ghost">
-          Cancel
-        </a>
-      </div>
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          required
+        />
 
-    </form>
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required
+        />
 
-    <p class="form-footer">
-      No account?
-      <a href="/auth/signup">Sign up</a>
-    </p>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">
+            Log In
+          </button>
+          <a href="/" class="btn-ghost">
+            Cancel
+          </a>
+        </div>
 
-  </section>
-</main>
+      </form>
+
+      <p class="auth-footer">
+        No account?
+        <a href="/auth/signup">Sign up</a>
+      </p>
+
+    </section>
+  </main>
+
+</body>
+</html>

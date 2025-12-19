@@ -1,13 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= tool.name %> | MCP Tool</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+
 <%- include('../layout') %>
 
 <main class="container">
 
-  <!-- TOOL CARD -->
+  <!-- TOOL DETAILS -->
   <section class="tool-card">
     <h1><%= tool.name %></h1>
 
-    <p><strong>Description:</strong> <%= tool.description %></p>
+    <p><strong>Description:</strong> <%= tool.description || '—' %></p>
     <p><strong>Platform:</strong> <%= tool.platform %></p>
+
     <p>
       <strong>Risk Level:</strong>
       <span class="severity-<%= tool.riskLevel.toLowerCase() %>">
@@ -15,12 +27,9 @@
       </span>
     </p>
 
-    <p>
-      <strong>Tags:</strong>
-      <%= tool.tags.join(', ') %>
-    </p>
+    <p><strong>Tags:</strong> <%= tool.tags.join(', ') || '—' %></p>
 
-    <div class="action-row">
+    <div class="form-actions">
       <a href="/tools/<%= tool._id %>/edit" class="btn-secondary">Edit Tool</a>
 
       <form
@@ -48,11 +57,14 @@
       <ul class="diagnostic-list">
         <% tool.diagnostics.forEach(diag => { %>
           <li class="diagnostic-item">
+
             <span class="severity-<%= diag.severity.toLowerCase() %>">
               <%= diag.severity %>
             </span>
 
-            <span class="diagnostic-note"><%= diag.note %></span>
+            <span class="diagnostic-note">
+              <%= diag.note || 'No notes' %>
+            </span>
 
             <div class="diag-actions">
               <a
@@ -70,6 +82,7 @@
                 <button type="submit" class="btn-danger-sm">Delete</button>
               </form>
             </div>
+
           </li>
         <% }) %>
       </ul>
@@ -79,3 +92,5 @@
   <a href="/tools" class="btn-ghost">← Back to Tools</a>
 
 </main>
+</body>
+</html>

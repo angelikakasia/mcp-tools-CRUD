@@ -470,3 +470,266 @@ label {
   display: inline-block;
   margin-top: 0.75rem;
 }
+/*  Auth Pages  */
+
+
+
+.auth-card {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.auth-footer {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.auth-footer a {
+  font-weight: 500;
+}
+
+/* Error message */
+.error {
+  background-color: #fee2e2;
+  color: #991b1b;
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+/* ===== Auth Pages ===== */
+
+.auth-card {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.auth-footer {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.auth-footer a {
+  font-weight: 500;
+}
+
+/* Error message (shared for login + signup) */
+.error {
+  background-color: #fee2e2;
+  color: #991b1b;
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+/* ===== Tools Index Page ===== */
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.section-header h1 {
+  margin: 0;
+}
+
+.empty-state {
+  margin-top: 1.5rem;
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+/* Grid */
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Tool Card */
+.tool-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 1.25rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tool-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.tool-card h3 {
+  margin: 0 0 0.5rem 0;
+}
+
+.tool-card h3 a {
+  text-decoration: none;
+  color: #111827;
+  font-weight: 600;
+}
+
+.tool-card p {
+  margin: 0.25rem 0;
+}
+
+/* Risk colors */
+.severity-low {
+  color: #15803d;
+  font-weight: 600;
+}
+
+.severity-medium {
+  color: #b45309;
+  font-weight: 600;
+}
+
+.severity-high {
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+/* Button spacing */
+.tool-card .btn-secondary {
+  display: inline-block;
+  margin-top: 0.75rem;
+}
+/*tools new*/
+/* ===== Forms ===== */
+
+.form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.form-stack label {
+  font-weight: 500;
+}
+
+.form-stack input,
+.form-stack textarea,
+.form-stack select {
+  width: 100%;
+  padding: 0.5rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 0.95rem;
+}
+
+.form-stack textarea {
+  resize: vertical;
+}
+/* FORCE form vertical layout */
+form.form-stack {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
+}
+
+form.form-stack label {
+  display: block;
+  font-weight: 500;
+}
+
+form.form-stack input,
+form.form-stack textarea,
+form.form-stack select {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  padding: 0.55rem 0.6rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+}
+/* ---------- LAYOUT ---------- */
+
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.tool-card {
+  background: #ffffff;
+  padding: 24px;
+  margin-bottom: 32px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* ---------- FORMS ---------- */
+
+.form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-stack label {
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.form-stack input,
+.form-stack textarea,
+.form-stack select {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+}
+
+.form-stack textarea {
+  resize: vertical;
+}
+
+/* ---------- ACTION BUTTONS ---------- */
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  align-items: center;
+}
+
+/* ---------- BUTTONS ---------- */
+
+.btn-primary {
+  background: #2563eb;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background: #e5e7eb;
+  padding: 8px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #111;
+}
+
+.btn-ghost {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.btn-danger {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+}

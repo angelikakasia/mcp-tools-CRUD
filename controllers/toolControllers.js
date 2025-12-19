@@ -3,8 +3,6 @@ const Diagnostic = require('../models/diagnostic'); // tools and diagnostics are
 
 
 
-
-
 // INDEX – show all tools that belong to logged-in user
 
 const index = async (req, res) => {

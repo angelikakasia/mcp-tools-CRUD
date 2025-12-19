@@ -1,64 +1,65 @@
-<%- include('../layout') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add MCP Tool</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
 
-<main class="container">
-  <section class="tool-card">
+<body>
 
-    <h1>Add MCP Tool</h1>
-    <p class="subtitle">
-      Create a new tool and define its risk profile.
-    </p>
+  <%- include('../layout') %>
 
-    <form action="/tools" method="POST">
+  <main class="container">
+    <section class="tool-card">
 
-      <label for="name">Name</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        required
-      >
+      <h1>Add MCP Tool</h1>
+      <p class="subtitle">
+        Create a new tool and define its risk profile.
+      </p>
 
-      <label for="description">Description</label>
-      <textarea
-        id="description"
-        name="description"
-        rows="4"
-      ></textarea>
+      <form action="/tools" method="POST" class="form-stack">
 
-      <label for="platform">Platform</label>
-      <input
-        type="text"
-        id="platform"
-        name="platform"
-        placeholder="GitHub, Cursor, FastMCP"
-        required
-      >
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required />
 
-      <label for="tags">Tags (comma-separated)</label>
-      <input
-        type="text"
-        id="tags"
-        name="tags"
-        placeholder="filesystem, read, high_privilege"
-      >
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="4"></textarea>
 
-      <label for="riskLevel">Risk Level</label>
-      <select id="riskLevel" name="riskLevel" required>
-        <option>Low</option>
-        <option>Medium</option>
-        <option>High</option>
-      </select>
+        <label for="platform">Platform</label>
+        <input
+          type="text"
+          id="platform"
+          name="platform"
+          placeholder="GitHub, Cursor, FastMCP"
+          required
+        />
 
-      <div class="form-actions">
-        <button type="submit" class="btn-primary">
-          Add Tool
-        </button>
-        <a href="/tools" class="btn-ghost">
-          Cancel
-        </a>
-      </div>
+        <label for="tags">Tags (comma-separated)</label>
+        <input
+          type="text"
+          id="tags"
+          name="tags"
+          placeholder="filesystem, read, high_privilege"
+        />
 
-    </form>
+        <label for="riskLevel">Risk Level</label>
+        <select id="riskLevel" name="riskLevel" required>
+          <option>Low</option>
+          <option>Medium</option>
+          <option>High</option>
+        </select>
 
-  </section>
-</main>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Add Tool</button>
+          <a href="/tools" class="btn-ghost">Cancel</a>
+        </div>
+
+      </form>
+
+    </section>
+  </main>
+
+</body>
+</html>

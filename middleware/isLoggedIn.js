@@ -6,3 +6,4 @@ module.exports = (req, res, next) => {
   // user is NOT logged in — redirect to login
   res.redirect('/auth/login');
 };
+/* what i most produ off what was the most diffuclt debugging*/ 

@@ -1,43 +1,57 @@
-<%- include('../layout') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My MCP Tools</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
 
-<main class="container">
+<body>
 
-  <div class="section-header">
-    <h1>My MCP Tools</h1>
-    <a href="/tools/new" class="btn-primary">Add New Tool</a>
-  </div>
+  <%- include('../layout') %>
 
-  <% if (tools.length === 0) { %>
-    <p class="empty-state">
-      You have no tools yet. Click “Add New Tool” to get started.
-    </p>
-  <% } else { %>
-    <div class="tool-grid">
-      <% tools.forEach(tool => { %>
-        <div class="tool-card">
+  <main class="container">
 
-          <h3>
-            <a href="/tools/<%= tool._id %>">
-              <%= tool.name %>
-            </a>
-          </h3>
-
-          <p><strong>Platform:</strong> <%= tool.platform %></p>
-
-          <p>
-            <strong>Risk:</strong>
-            <span class="severity-<%= tool.riskLevel.toLowerCase() %>">
-              <%= tool.riskLevel %>
-            </span>
-          </p>
-
-          <a href="/tools/<%= tool._id %>" class="btn-secondary">
-            View Details
-          </a>
-
-        </div>
-      <% }) %>
+    <div class="section-header">
+      <h1>My MCP Tools</h1>
+      <a href="/tools/new" class="btn-primary">Add New Tool</a>
     </div>
-  <% } %>
 
-</main>
+    <% if (tools.length === 0) { %>
+      <p class="empty-state">
+        You have no tools yet. Click “Add New Tool” to get started.
+      </p>
+    <% } else { %>
+      <div class="tool-grid">
+        <% tools.forEach(tool => { %>
+          <div class="tool-card">
+
+            <h3>
+              <a href="/tools/<%= tool._id %>">
+                <%= tool.name %>
+              </a>
+            </h3>
+
+            <p><strong>Platform:</strong> <%= tool.platform %></p>
+
+            <p>
+              <strong>Risk:</strong>
+              <span class="severity-<%= tool.riskLevel.toLowerCase() %>">
+                <%= tool.riskLevel %>
+              </span>
+            </p>
+
+            <a href="/tools/<%= tool._id %>" class="btn-secondary">
+              View Details
+            </a>
+
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+
+  </main>
+
+</body>
+</html>

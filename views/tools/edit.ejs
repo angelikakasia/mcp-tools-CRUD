@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Tool</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+
 <%- include('../layout') %>
 
 <main class="container">
@@ -8,58 +19,40 @@
       Update details for <strong><%= tool.name %></strong>
     </p>
 
-    <form action="/tools/<%= tool._id %>?_method=PUT" method="POST">
+    <form
+      action="/tools/<%= tool._id %>?_method=PUT"
+      method="POST"
+      class="form-stack"
+    >
 
       <label for="name">Name</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        value="<%= tool.name %>"
-        required
-      >
-
-      <label for="platform">Platform</label>
-      <input
-        type="text"
-        id="platform"
-        name="platform"
-        value="<%= tool.platform %>"
-        required
-      >
-
-      <label for="riskLevel">Risk Level</label>
-      <select id="riskLevel" name="riskLevel">
-        <option <%= tool.riskLevel === "Low" ? "selected" : "" %>>Low</option>
-        <option <%= tool.riskLevel === "Medium" ? "selected" : "" %>>Medium</option>
-        <option <%= tool.riskLevel === "High" ? "selected" : "" %>>High</option>
-      </select>
+      <input type="text" id="name" name="name" value="<%= tool.name %>" required>
 
       <label for="description">Description</label>
-      <textarea
-        id="description"
-        name="description"
-        rows="4"
-      ><%= tool.description %></textarea>
+      <textarea id="description" name="description" rows="4"><%= tool.description %></textarea>
+
+      <label for="platform">Platform</label>
+      <input type="text" id="platform" name="platform" value="<%= tool.platform %>" required>
 
       <label for="tags">Tags (comma-separated)</label>
-      <input
-        type="text"
-        id="tags"
-        name="tags"
-        value="<%= tool.tags.join(', ') %>"
-      >
+      <input type="text" id="tags" name="tags" value="<%= tool.tags.join(', ') %>">
+
+      <label for="riskLevel">Risk Level</label>
+      <select id="riskLevel" name="riskLevel" required>
+        <option value="Low" <%= tool.riskLevel === 'Low' ? 'selected' : '' %>>Low</option>
+        <option value="Medium" <%= tool.riskLevel === 'Medium' ? 'selected' : '' %>>Medium</option>
+        <option value="High" <%= tool.riskLevel === 'High' ? 'selected' : '' %>>High</option>
+      </select>
 
       <div class="form-actions">
-        <button type="submit" class="btn-primary">
-          Update Tool
-        </button>
-        <a href="/tools/<%= tool._id %>" class="btn-ghost">
-          Cancel
-        </a>
+        <button type="submit" class="btn-primary">Update Tool</button>
+        <a href="/tools/<%= tool._id %>" class="btn-ghost">Cancel</a>
       </div>
 
     </form>
 
   </section>
 </main>
+
+</body>
+</html>

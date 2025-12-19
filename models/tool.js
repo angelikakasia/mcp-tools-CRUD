@@ -37,7 +37,8 @@ const toolSchema = new mongoose.Schema(
       enum: ['Low', 'Medium', 'High'],
       required: true
     },
-    diagnostics: [diagnosticSchema],
+    diagnostics: [diagnosticSchema], //embedded diagnostics -this is not a model is just a schema
+    //full model you have to go through model to get to the embeded schema
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
@@ -48,3 +49,4 @@ const toolSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model('Tool', toolSchema);
+//referencing 2 diff. models referencing each other they can exists independently

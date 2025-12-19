@@ -6,6 +6,7 @@ const session = require('express-session'); // keeps user logged in
 const MongoStore = require('connect-mongo').default; // stores session in MongoDB
 const isLoggedIn = require('./middleware/isLoggedIn'); // auth middleware
 const app = express(); // starts express app
+const morgan = require('morgan'); // logger middleware
 app.set('view engine', 'ejs'); // sets EJS as view engine
 app.set('port', process.env.PORT || 3333); // sets port from environment or default to 3000
 
@@ -22,6 +23,7 @@ mongoose.connection.on('error', (err) => {
 app.use(express.urlencoded({ extended: true })); // read form data
 app.use(methodOverride('_method')); // enable PUT & DELETE
 app.use(express.static('public')); // serve CSS, images, JS
+app.use(morgan('dev')); // logger middleware 
 
 // Sessions
 app.use(session({

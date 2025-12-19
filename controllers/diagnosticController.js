@@ -1,7 +1,4 @@
-const Diagnostic = require('../models/diagnostic');
 const Tool = require('../models/tool');
-
-
 
 
 
@@ -24,7 +21,7 @@ const create = async (req, res) => {
     });
 
     await tool.save();
-
+    console.log("Tool after pushing diagnostic:", tool);
     res.redirect(`/tools/${tool._id}`);
 
   } catch (err) {
@@ -72,13 +69,17 @@ const renderNew = async (req, res) => {
   }
 };
 
-// UPDATE diagnostic
+// EDIT diagnostic
 const update = async (req, res) => {
   try {
-    const diagnostic = await Diagnostic.findOne({
-      _id: req.params.diagnosticId,
+    const tool = await Tool.findOne({
+      _id: req.params.toolId,
       createdBy: req.session.user._id
     });
+
+    if (!tool) return res.redirect('/tools');
+
+    const diagnostic = tool.diagnostics.id(req.params.diagnosticId);
 
     if (!diagnostic) return res.redirect('/tools');
 
@@ -86,10 +87,10 @@ const update = async (req, res) => {
     diagnostic.note = req.body.note;
     diagnostic.severity = req.body.severity;
     diagnostic.resolved = req.body.resolved === 'on';
+    diagnostic.set(req.body);
+    await tool.save();
 
-    await diagnostic.save();
-
-    res.redirect(`/tools/${diagnostic.tool}`);
+    res.redirect(`/tools/${tool._id}`);
 
   } catch (err) {
     console.log('Error updating diagnostic:', err);
@@ -100,24 +101,27 @@ const update = async (req, res) => {
 // DELETE diagnostic
 const deleteDiagnostic = async (req, res) => {
   try {
-    const diagnostic = await Diagnostic.findOne({
-      _id: req.params.diagnosticId,
+    const tool = await Tool.findOne({
+      _id: req.params.toolId,
       createdBy: req.session.user._id
     });
 
+    if (!tool) return res.redirect('/tools');
+
+    const diagnostic = tool.diagnostics.id(req.params.diagnosticId);
+
     if (!diagnostic) return res.redirect('/tools');
+    diagnostic.deleteOne();
+    await tool.save();
+    //
 
-    const toolId = diagnostic.tool;
-
-    await Diagnostic.deleteOne({ _id: diagnostic._id });
-
-    res.redirect(`/tools/${toolId}`);
+    res.redirect(`/tools/${tool._id}`);
 
   } catch (err) {
     console.log('Error deleting diagnostic:', err);
     res.redirect('/tools');
   }
-};
+}; 
 module.exports = {
     create,
     renderEdit,
