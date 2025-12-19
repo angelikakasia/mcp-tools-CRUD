@@ -6,6 +6,8 @@ Built with Node.js, Express, MongoDB, and EJS.
 
 ---
 
+My MCP tools are designed to model, track, and diagnose security risks introduced by MCP-based AI tools and agents.
+
 ## Tech Stack
 
 - Node.js
